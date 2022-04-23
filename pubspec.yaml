@@ -35,6 +35,8 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   http: ^0.13.4
+  dot_navigation_bar: ^1.0.1+4
+  google_nav_bar: ^5.0.6
   
   
 
