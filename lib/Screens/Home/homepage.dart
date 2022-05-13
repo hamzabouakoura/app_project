@@ -1,6 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:xy2/Screens/Home/bottomnavbar.dart';
+import 'package:xy2/Screens/Home/favourite.dart';
+import 'package:xy2/Screens/Home/filter.dart';
+import 'package:xy2/Screens/Home/homeprods.dart';
+import 'package:xy2/Screens/Home/masseges.dart';
+import 'package:xy2/Screens/Profile/profile.dart';
+import 'package:xy2/Screens/Property/propertydetails.dart';
 import 'data.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,47 +17,52 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentIndex = 0;
+  final screens = [
+    HomeProds(),
+    FavouritePage(),
+    MassegesPage(),
+    ProfilePage(),
+  ];
+
   List<Property> properties = getPropertyList();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: GNav(
-            activeColor: Colors.redAccent,
-            color: Colors.black,
-            backgroundColor: Colors.white,
-            gap: 8,
-            padding: EdgeInsets.all(15),
-            tabs: [
-              GButton(
-                icon: Icons.home,
-                text: 'Home',
-                onPressed: () {},
-              ),
-              GButton(
-                icon: Icons.favorite,
-                text: 'Likes',
-                onPressed: () {},
-              ),
-              GButton(
-                icon: Icons.message,
-                text: 'Messages',
-                onPressed: () {},
-              ),
-              GButton(
-                icon: Icons.person,
-                text: 'Profile',
-                onPressed: () {},
-              )
-            ]),
-      ),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: (index) => setState(() {
+                currentIndex = index;
+              }),
+          selectedItemColor: Colors.red,
+          backgroundColor: Colors.white,
+          unselectedItemColor: Colors.black,
+          showUnselectedLabels: true,
+          items: [
+            BottomNavigationBarItem(
+              label: 'Home',
+              icon: Icon(Icons.home),
+            ),
+            BottomNavigationBarItem(
+              label: 'Favourite',
+              icon: Icon(Icons.favorite),
+            ),
+            BottomNavigationBarItem(
+              label: 'Messages',
+              icon: Icon(Icons.message),
+            ),
+            BottomNavigationBarItem(
+                label: 'Profile',
+                icon: Icon(
+                  Icons.person,
+                )),
+          ]),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
+            colors: const [
               Color(0xFFe9b7ce),
               Color(0xFFffb88e),
               Color(0xFFabc9e9),
@@ -61,179 +72,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: CupertinoSearchTextField(
-                  backgroundColor: Colors.white,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    children: buildProperties(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  List<Widget> buildProperties() {
-    List<Widget> list = [];
-    for (var i = 0; i < properties.length; i++) {
-      list.add(Hero(
-          tag: properties[i].frontImage,
-          child: buildProperty(properties[i], i)));
-    }
-    return list;
-  }
-
-  Widget buildProperty(Property property, int index) {
-    return GestureDetector(
-      onTap: () {},
-      child: Card(
-        margin: EdgeInsets.only(bottom: 24),
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(15),
-          ),
-        ),
-        child: Container(
-          height: 210,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(property.frontImage),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.black.withOpacity(0.7),
-                ],
-              ),
-            ),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                ),
-                width: 80,
-                padding: EdgeInsets.symmetric(
-                  vertical: 4,
-                ),
-                child: Center(
-                  child: Text(
-                    "FOR " + property.label,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(),
-              ),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        property.name,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        property.price + r" DZD ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.location_on,
-                            color: Colors.white,
-                            size: 14,
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            property.location,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.yellow[700],
-                            size: 14,
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            property.review + " Reviews",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ]),
-          ),
+          child: screens[currentIndex],
         ),
       ),
     );
