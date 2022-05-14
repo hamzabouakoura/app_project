@@ -41,20 +41,32 @@ class _PropertyInfoState extends State<PropertyInfo> {
                     SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      widget.property.location,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: white,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.room,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          widget.property.location,
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
                 Text(
                   '${widget.property.price} Dzd',
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -63,12 +75,106 @@ class _PropertyInfoState extends State<PropertyInfo> {
             ),
           ),
           Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      height: 65,
+                      width: 65,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(widget.property.ownerImage),
+                          fit: BoxFit.cover,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Owner Name",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          "Property Owner",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      height: 45,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        color: Colors.red[700]!.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.phone,
+                            color: Colors.red[700],
+                            size: 20,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Container(
+                      height: 45,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        color: Colors.red[700]!.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.message,
+                            color: Colors.red[700],
+                            size: 20,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
             padding:
                 const EdgeInsets.only(left: appPadding, bottom: appPadding),
             child: Text(
-              'Property information',
+              'Property informations',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -107,7 +213,7 @@ class _PropertyInfoState extends State<PropertyInfo> {
                           height: 10,
                         ),
                         Text(
-                          'Square foot',
+                          'Square meter',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -134,7 +240,7 @@ class _PropertyInfoState extends State<PropertyInfo> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.property.sqm.toString(),
+                          widget.property.rooms.toString(),
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -171,7 +277,7 @@ class _PropertyInfoState extends State<PropertyInfo> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.property.sqm.toString(),
+                          widget.property.bathrooms.toString(),
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -208,7 +314,7 @@ class _PropertyInfoState extends State<PropertyInfo> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.property.sqm.toString(),
+                          widget.property.garages.toString(),
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
