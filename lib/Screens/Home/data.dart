@@ -11,6 +11,7 @@ class Property {
   String sqm;
   String description;
   String frontImage;
+  String ownername;
   String ownerImage;
   List<String> images;
 
@@ -25,6 +26,7 @@ class Property {
       this.sqm,
       this.description,
       this.frontImage,
+      this.ownername,
       this.ownerImage,
       this.images);
 }
@@ -42,6 +44,7 @@ List<Property> getPropertyList() {
       "2,456",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_01.jpg",
+      "Real Estate",
       "assets/images/owner.jpg",
       [
         "assets/images/kitchen.jpg",
@@ -62,6 +65,7 @@ List<Property> getPropertyList() {
       "3,300",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_04.jpg",
+      "Real Estate",
       "assets/images/owner.jpg",
       [
         "assets/images/kitchen.jpg",
@@ -82,6 +86,7 @@ List<Property> getPropertyList() {
       "2,100",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_02.jpg",
+      "Real Estate",
       "assets/images/owner.jpg",
       [
         "assets/images/kitchen.jpg",
@@ -102,6 +107,7 @@ List<Property> getPropertyList() {
       "4,100",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_03.jpg",
+      "Real Estate",
       "assets/images/owner.jpg",
       [
         "assets/images/kitchen.jpg",
@@ -122,6 +128,7 @@ List<Property> getPropertyList() {
       "3,100",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_05.jpg",
+      "Real Estate",
       "assets/images/owner.jpg",
       [
         "assets/images/kitchen.jpg",

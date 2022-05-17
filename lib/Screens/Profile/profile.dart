@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:xy2/Screens/Profile/profilemenu.dart';
 import 'package:xy2/Screens/Profile/profilepic.dart';
+import 'userdata.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final User user = Userinfo().myuser;
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
@@ -24,6 +26,10 @@ class ProfilePage extends StatelessWidget {
               height: 50,
             ),
             Pofile(),
+            SizedBox(
+              height: 20,
+            ),
+            buildname(user),
             SizedBox(
               height: 20,
             ),
@@ -50,6 +56,33 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildname(User user) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          user.firstname,
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Text(
+          user.lastname,
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }

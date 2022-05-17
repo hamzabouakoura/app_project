@@ -15,18 +15,14 @@ class Pofile extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundImage: AssetImage('assets/images/avatar.png'),
-            
           ),
           Positioned(
-            right: 100,
-            bottom: 0,
+            right: 120,
+            bottom: 20,
             child: SizedBox(
-              child: FlatButton(
-                onPressed: () {},
-                child: Icon(
-                  Icons.camera_alt_outlined,
-                  color: Colors.white,
-                ),
+              child: Icon(
+                Icons.camera_alt_outlined,
+                color: Colors.white,
               ),
             ),
           ),

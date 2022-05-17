@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xy2/Screens/Home/data.dart';
 import 'package:xy2/Screens/Property/propertyinfo.dart';
-import 'package:carousel_pro/carousel_pro.dart';
+import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:xy2/constantcolors.dart';
 
 class PropertyDetails extends StatefulWidget {
@@ -15,6 +15,8 @@ class PropertyDetails extends StatefulWidget {
 class _PropertyDetailsState extends State<PropertyDetails> {
   @override
   Widget build(BuildContext context) {
+    int index = 0;
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -39,6 +41,10 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                     images: [
                       Image.asset(
                         widget.property.frontImage,
+                        fit: BoxFit.cover,
+                      ),
+                      Image.asset(
+                        widget.property.images.elementAt(0),
                         fit: BoxFit.cover,
                       ),
                     ],

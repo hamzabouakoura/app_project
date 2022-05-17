@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xy2/Screens/Home/bottomnavbar.dart';
 import 'package:xy2/Screens/Home/favourite.dart';
-import 'package:xy2/Screens/Home/filter.dart';
 import 'package:xy2/Screens/Home/homeprods.dart';
 import 'package:xy2/Screens/Home/masseges.dart';
 import 'package:xy2/Screens/Profile/profile.dart';
-import 'package:xy2/Screens/Property/propertydetails.dart';
 import 'data.dart';
 
 class HomePage extends StatefulWidget {

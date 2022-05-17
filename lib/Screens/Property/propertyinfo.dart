@@ -11,6 +11,20 @@ class PropertyInfo extends StatefulWidget {
 }
 
 class _PropertyInfoState extends State<PropertyInfo> {
+  bool _isfavorited = false;
+  int _favoritecount = 0;
+  void _toggleFavorite() {
+    setState(() {
+      if (_isfavorited) {
+        _favoritecount -= 1;
+        _isfavorited = false;
+      } else {
+        _favoritecount += 1;
+        _isfavorited = true;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -63,13 +77,37 @@ class _PropertyInfoState extends State<PropertyInfo> {
                     ),
                   ],
                 ),
-                Text(
-                  '${widget.property.price} Dzd',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      '${widget.property.price} Dzd',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: _toggleFavorite,
+                          icon: (_isfavorited
+                              ? const Icon(Icons.favorite)
+                              : const Icon(Icons.favorite_border)),
+                          color: Colors.red,
+                        ),
+                        SizedBox(
+                          width: 10,
+                          child: SizedBox(
+                            child: Text('$_favoritecount'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -99,7 +137,7 @@ class _PropertyInfoState extends State<PropertyInfo> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Owner Name",
+                          widget.property.ownername,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

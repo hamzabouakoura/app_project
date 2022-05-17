@@ -24,8 +24,7 @@ class _HomeProdsState extends State<HomeProds> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+    return ListView(
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
@@ -61,7 +60,7 @@ class _HomeProdsState extends State<HomeProds> {
           ),
         ),
         Container(
-          height: 50,
+          height: 40,
           child: ListView.builder(
             shrinkWrap: false,
             scrollDirection: Axis.horizontal,
@@ -79,9 +78,7 @@ class _HomeProdsState extends State<HomeProds> {
         Expanded(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24),
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
+            child: Column(
               children: buildProperties(),
             ),
           ),
@@ -106,9 +103,7 @@ class _HomeProdsState extends State<HomeProds> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => PropertyDetails(
-                    property: property,
-                  )),
+              builder: (context) => PropertyDetails(property: property)),
         );
       },
       child: Card(
