@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:xy2/Screens/Profile/edit_profile_page.dart';
+import 'package:xy2/Screens/Home/homeheader.dart';
+import 'package:xy2/Screens/Home/homeprods.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/agencydata.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/editagencyprofile.dart';
 import 'package:xy2/Screens/Profile/profile_widget.dart';
 import 'package:xy2/Screens/Profile/profilemenu.dart';
-import 'userdata.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class AgencyProfilePage extends StatelessWidget {
+  const AgencyProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final User user = Userinfo().myuser;
+    final Agency agency = Agencyinfo().myagency;
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
@@ -27,14 +29,14 @@ class ProfilePage extends StatelessWidget {
               height: 50,
             ),
             ProfileWidget(
-              imagePath: user.userimage,
+              imagePath: agency.agencyimage,
               isEdit: false,
               onClicked: () async {},
             ),
             SizedBox(
               height: 20,
             ),
-            buildname(user),
+            buildname(agency),
             SizedBox(
               height: 20,
             ),
@@ -43,20 +45,26 @@ class ProfilePage extends StatelessWidget {
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EditProfilePage()),
+                  MaterialPageRoute(
+                      builder: (context) => EditAgencyProfilePage()),
                 );
               },
               icon: Icon(Icons.person),
             ),
             ProfileMenu(
-              text: 'Notifications',
+              text: 'Add new offer',
               press: () {},
-              icon: Icon(Icons.notifications),
+              icon: Icon(Icons.local_offer),
             ),
             ProfileMenu(
-              text: 'Help Center',
-              press: () {},
-              icon: Icon(Icons.help_center),
+              text: 'Your offers',
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OffersList()),
+                );
+              },
+              icon: Icon(Icons.list),
             ),
             ProfileMenu(
               text: 'Log out',
@@ -69,30 +77,16 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget buildname(User user) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          user.firstname,
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+  Widget buildname(Agency agency) {
+    return Center(
+      child: Text(
+        agency.companyname,
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
         ),
-        SizedBox(
-          width: 5,
-        ),
-        Text(
-          user.lastname,
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

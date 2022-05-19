@@ -3,6 +3,9 @@ import 'package:xy2/Screens/Home/data.dart';
 import 'package:xy2/Screens/Property/propertyinfo.dart';
 import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:xy2/constantcolors.dart';
+import 'package:comment_box/comment/comment.dart';
+import 'package:comment_box/comment/test.dart';
+import 'package:comment_box/main.dart';
 
 class PropertyDetails extends StatefulWidget {
   final Property property;

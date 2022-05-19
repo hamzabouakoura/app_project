@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xy2/Screens/Home/data.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/agencydata.dart';
+import 'package:xy2/Screens/Property/commentpage.dart';
 import 'package:xy2/constantcolors.dart';
 
 class PropertyInfo extends StatefulWidget {
@@ -27,6 +29,7 @@ class _PropertyInfoState extends State<PropertyInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final Agency agency = Agencyinfo().myagency;
     return Expanded(
       child: ListView(
         physics: BouncingScrollPhysics(),
@@ -124,7 +127,7 @@ class _PropertyInfoState extends State<PropertyInfo> {
                       width: 65,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(widget.property.ownerImage),
+                          image: AssetImage(agency.agencyimage),
                           fit: BoxFit.cover,
                         ),
                         shape: BoxShape.circle,
@@ -197,7 +200,12 @@ class _PropertyInfoState extends State<PropertyInfo> {
                             color: Colors.red[700],
                             size: 20,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => TestMe()),
+                            );
+                          },
                         ),
                       ),
                     ),
