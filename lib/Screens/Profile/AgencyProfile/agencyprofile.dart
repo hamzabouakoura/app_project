@@ -3,6 +3,7 @@ import 'package:xy2/Screens/Home/homeheader.dart';
 import 'package:xy2/Screens/Home/homeprods.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/agencydata.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/editagencyprofile.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/newoffer.dart';
 import 'package:xy2/Screens/Profile/profile_widget.dart';
 import 'package:xy2/Screens/Profile/profilemenu.dart';
 
@@ -53,7 +54,12 @@ class AgencyProfilePage extends StatelessWidget {
             ),
             ProfileMenu(
               text: 'Add new offer',
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewOffer()),
+                );
+              },
               icon: Icon(Icons.local_offer),
             ),
             ProfileMenu(
