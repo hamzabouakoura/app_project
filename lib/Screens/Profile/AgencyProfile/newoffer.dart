@@ -13,8 +13,10 @@ class NewOffer extends StatefulWidget {
 
 class _NewOfferState extends State<NewOffer> {
   File? _file;
-  Future pickImage(ImageSource source) async {
-    final image = await ImagePicker().getImage(source: source);
+  ImagePicker _picker = ImagePicker();
+  List<XFile> images = [];
+  Future pickImage() async {
+    final image = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
       _file = File(image!.path);
     });
@@ -28,7 +30,7 @@ class _NewOfferState extends State<NewOffer> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text('Edit Profile'),
+        title: Text('Add new offer'),
         centerTitle: true,
       ),
       body: Container(
@@ -76,22 +78,59 @@ class _NewOfferState extends State<NewOffer> {
                     primary: Colors.red[300],
                     shape: StadiumBorder(),
                   ),
-                  onPressed: () {
-                    pickImage(ImageSource.gallery);
-                  },
+                  onPressed: _pickImages,
                   child: Text('Upload images'),
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Row(
-                  children: [
-                    _file == null
-                        ? Text('No image is selected')
-                        : Container(
-                            height: 200, width: 100, child: Image.file(_file!)),
-                  ],
+                child: Container(
+                  height: 150,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    physics: BouncingScrollPhysics(),
+                    children: List.generate(images.length, (index) {
+                      File file = File(images[index].path);
+                      return file == null
+                          ? Text('No image is selected')
+                          : Container(
+                              padding: EdgeInsets.only(right: 15),
+                              child: Stack(
+                                children: [
+                                  Image.file(file),
+                                  Positioned(
+                                    right: 5,
+                                    top: 5,
+                                    child: InkWell(
+                                      child: Icon(
+                                        Icons.remove_circle,
+                                        size: 20,
+                                        color: Colors.red,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          images.removeAt(index);
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                    }),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red[300],
+                    shape: StadiumBorder(),
+                  ),
+                  onPressed: () {},
+                  child: Text('Create the offer'),
                 ),
               ),
             ],
@@ -99,5 +138,12 @@ class _NewOfferState extends State<NewOffer> {
         ),
       ),
     );
+  }
+
+  _pickImages() async {
+    List<XFile>? res = await _picker.pickMultiImage();
+    setState(() {
+      images.addAll(res!);
+    });
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xy2/Screens/Forgot%20Password/forgotpassword.dart';
+import 'package:xy2/Screens/Home/agencyhomepage.dart';
 import 'package:xy2/Screens/Home/homepage.dart';
 import 'package:xy2/Sign up choice/signupchoice.dart';
 
@@ -155,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()),
+                              builder: (context) => const AgencyHomePage()),
                         );
                       },
                       child: Text('Login'),

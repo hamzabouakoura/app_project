@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:xy2/Screens/Home/agencyhomepagecontent.dart';
 import 'package:xy2/Screens/Home/favourite.dart';
 import 'package:xy2/Screens/Home/homeprods.dart';
 import 'package:xy2/Screens/Home/masseges.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/agencyprofile.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/newoffer.dart';
 import 'package:xy2/Screens/Profile/profile.dart';
 import 'data.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class AgencyHomePage extends StatefulWidget {
+  const AgencyHomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<AgencyHomePage> createState() => _AgencyHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AgencyHomePageState extends State<AgencyHomePage> {
   int currentIndex = 0;
   final screens = [
-    HomeProds(),
+    AgencyContent(),
     FavouritePage(),
     MassegesPage(),
-    ProfilePage(),
+    AgencyProfilePage(),
   ];
 
   List<Property> properties = getPropertyList();
@@ -28,6 +30,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.redAccent,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const NewOffer()),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
           onTap: (index) => setState(() {

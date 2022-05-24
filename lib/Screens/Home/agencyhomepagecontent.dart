@@ -1,38 +1,81 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xy2/Screens/Home/filter.dart';
 import 'package:xy2/Screens/Property/propertydetails.dart';
 import 'data.dart';
 
-class OffersList extends StatefulWidget {
-  const OffersList({Key? key}) : super(key: key);
+class AgencyContent extends StatefulWidget {
+  const AgencyContent({Key? key}) : super(key: key);
 
   @override
-  State<OffersList> createState() => _OffersListState();
+  State<AgencyContent> createState() => _AgencyContentState();
 }
 
-class _OffersListState extends State<OffersList> {
+class _AgencyContentState extends State<AgencyContent> {
+  final filterArray = [
+    "Alger",
+    "Oran",
+    "Constantine",
+    "Annaba",
+    "Batna",
+    "Skikda",
+  ];
   List<Property> properties = getPropertyList();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: const [
-            Color(0xFFe9b7ce),
-            Color(0xFFffb88e),
-            Color(0xFFabc9e9),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Discover ',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: ListView(
-          children: buildProperties(),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Container(
+            height: 50,
+            child: CupertinoSearchTextField(
+              backgroundColor: Colors.white,
+            ),
+          ),
         ),
-      ),
+        Container(
+          height: 40,
+          child: ListView.builder(
+            shrinkWrap: false,
+            scrollDirection: Axis.horizontal,
+            itemCount: filterArray.length,
+            itemBuilder: (context, index) {
+              return FilterWidget(
+                filterTxt: filterArray[index],
+              );
+            },
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: buildProperties(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

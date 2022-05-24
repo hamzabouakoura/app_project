@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xy2/Screens/Home/homeheader.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/offerslist.dart';
 import 'package:xy2/Screens/Home/homeprods.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/agencydata.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/editagencyprofile.dart';

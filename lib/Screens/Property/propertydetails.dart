@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xy2/Screens/Home/data.dart';
+import 'package:xy2/Screens/Property/maps.dart';
 import 'package:xy2/Screens/Property/propertyinfo.dart';
 import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:xy2/constantcolors.dart';
@@ -78,18 +79,26 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                       ]),
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.map,
-                          color: white,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('View on map'),
-                      ],
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MapView()),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.map,
+                            color: white,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('View on map'),
+                        ],
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red[300],
