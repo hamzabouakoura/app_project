@@ -3,6 +3,8 @@ import 'package:xy2/Screens/Home/data.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/agencydata.dart';
 import 'package:xy2/Screens/Property/commentpage.dart';
 import 'package:xy2/constantcolors.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/src/legacy_api.dart';
 
 class PropertyInfo extends StatefulWidget {
   final Property property;
@@ -30,6 +32,7 @@ class _PropertyInfoState extends State<PropertyInfo> {
   @override
   Widget build(BuildContext context) {
     final Agency agency = Agencyinfo().myagency;
+    final number = agency.phone;
     return Expanded(
       child: ListView(
         physics: BouncingScrollPhysics(),
@@ -179,7 +182,9 @@ class _PropertyInfoState extends State<PropertyInfo> {
                             color: Colors.red[700],
                             size: 20,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            launch('tel:$number');
+                          },
                         ),
                       ),
                     ),

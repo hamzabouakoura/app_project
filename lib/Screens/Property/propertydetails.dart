@@ -4,9 +4,6 @@ import 'package:xy2/Screens/Property/maps.dart';
 import 'package:xy2/Screens/Property/propertyinfo.dart';
 import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:xy2/constantcolors.dart';
-import 'package:comment_box/comment/comment.dart';
-import 'package:comment_box/comment/test.dart';
-import 'package:comment_box/main.dart';
 
 class PropertyDetails extends StatefulWidget {
   final Property property;
@@ -83,7 +80,10 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MapView()),
+                          MaterialPageRoute(
+                              builder: (context) => MapView(
+                                    property: widget.property,
+                                  )),
                         );
                       },
                       child: Row(

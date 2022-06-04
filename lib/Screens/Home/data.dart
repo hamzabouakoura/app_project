@@ -8,6 +8,7 @@ class Property {
   String garages;
   String price;
   String location;
+  List<double> Latlng;
   String sqm;
   String description;
   String frontImage;
@@ -23,6 +24,7 @@ class Property {
       this.garages,
       this.price,
       this.location,
+      this.Latlng,
       this.sqm,
       this.description,
       this.frontImage,
@@ -41,6 +43,10 @@ List<Property> getPropertyList() {
       "03",
       "2,500.00",
       "Alger",
+      [
+        36.771721,
+        3.051760,
+      ],
       "2,456",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_01.jpg",
@@ -62,6 +68,10 @@ List<Property> getPropertyList() {
       "03",
       "3,500.00",
       "Constantine",
+      [
+        36.351830,
+        6.611630,
+      ],
       "3,300",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_04.jpg",
@@ -83,6 +93,10 @@ List<Property> getPropertyList() {
       "03",
       "1,200.00",
       "Annaba",
+      [
+        36.900162,
+        7.765300,
+      ],
       "2,100",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_02.jpg",
@@ -104,6 +118,10 @@ List<Property> getPropertyList() {
       "03",
       "4,400.00",
       "Oran",
+      [
+        35.7032751,
+        -0.6492976,
+      ],
       "4,100",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_03.jpg",
@@ -125,6 +143,10 @@ List<Property> getPropertyList() {
       "03",
       "5,200.00",
       "Batna",
+      [
+        35.544621,
+        6.165270,
+      ],
       "3,100",
       "The living is easy in this impressive, generously proportioned contemporary residence with lake and ocean views, located within a level stroll to the sand and surf.",
       "assets/images/house_05.jpg",

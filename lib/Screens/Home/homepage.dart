@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:xy2/Screens/Home/favourite.dart';
 import 'package:xy2/Screens/Home/homeprods.dart';
 import 'package:xy2/Screens/Home/masseges.dart';
-import 'package:xy2/Screens/Profile/AgencyProfile/agencyprofile.dart';
 import 'package:xy2/Screens/Profile/profile.dart';
 import 'data.dart';
 

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/editoffer.dart';
 import 'package:xy2/Screens/Property/propertydetails.dart';
 import '../../Home/data.dart';
 
@@ -95,27 +96,57 @@ class _OffersListState extends State<OffersList> {
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                ),
-                width: 80,
-                padding: EdgeInsets.symmetric(
-                  vertical: 4,
-                ),
-                child: Center(
-                  child: Text(
-                    "FOR " + property.label,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                    ),
+                    width: 80,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 4,
+                    ),
+                    child: Center(
+                      child: Text(
+                        "FOR " + property.label,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditOffer(property)),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.edit,
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               Expanded(
                 child: Container(),

@@ -126,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
+                    // ignore: deprecated_member_use
                     child: FlatButton(
                       onPressed: () {
                         Navigator.push(

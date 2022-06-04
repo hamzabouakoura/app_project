@@ -1,18 +1,20 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:xy2/Screens/Profile/AgencyProfile/mappicker.dart';
-import 'package:xy2/Screens/Profile/AgencyProfile/offerform.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/agencydata.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/offerformtoedit.dart';
+import 'package:xy2/Screens/Home/data.dart';
 
-class NewOffer extends StatefulWidget {
-  const NewOffer({Key? key}) : super(key: key);
+class EditOffer extends StatefulWidget {
+  final Property property;
+  EditOffer(this.property);
 
   @override
-  State<NewOffer> createState() => _NewOfferState();
+  State<EditOffer> createState() => _EditOfferState();
 }
 
-class _NewOfferState extends State<NewOffer> {
+class _EditOfferState extends State<EditOffer> {
   File? _file;
   ImagePicker _picker = ImagePicker();
   List<XFile> images = [];
@@ -31,7 +33,7 @@ class _NewOfferState extends State<NewOffer> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text('Add new offer'),
+        title: Text('Edit Offer'),
         centerTitle: true,
       ),
       body: Container(
@@ -48,6 +50,7 @@ class _NewOfferState extends State<NewOffer> {
         ),
         child: SafeArea(
           child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
               Padding(
                 padding:
@@ -61,17 +64,39 @@ class _NewOfferState extends State<NewOffer> {
                   ),
                 ),
               ),
-              OfferForm(hint: 'Name'),
-              OfferForm(hint: 'Type'),
-              OfferForm(hint: 'Location'),
-              OfferForm(hint: 'Rooms'),
-              OfferForm(hint: 'Bathrooms'),
-              OfferForm(hint: 'Garages'),
-              OfferForm(hint: 'Price'),
-              OfferForm(
-                hint: 'Description',
-                maxLines: 7,
-              ),
+              OfferFormEdit(
+                  hint: 'Name',
+                  text: widget.property.name,
+                  onChanged: (name) {}),
+              OfferFormEdit(
+                  hint: 'Type',
+                  text: widget.property.label,
+                  onChanged: (label) {}),
+              OfferFormEdit(
+                  hint: 'Location',
+                  text: widget.property.location,
+                  onChanged: (location) {}),
+              OfferFormEdit(
+                  hint: 'Rooms',
+                  text: widget.property.rooms,
+                  onChanged: (rooms) {}),
+              OfferFormEdit(
+                  hint: 'Bathrooms',
+                  text: widget.property.bathrooms,
+                  onChanged: (bathrooms) {}),
+              OfferFormEdit(
+                  hint: 'Garages',
+                  text: widget.property.garages,
+                  onChanged: (garages) {}),
+              OfferFormEdit(
+                  hint: 'Price',
+                  text: widget.property.price,
+                  onChanged: (price) {}),
+              OfferFormEdit(
+                  hint: 'Description',
+                  text: widget.property.description,
+                  maxLines: 7,
+                  onChanged: (price) {}),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ElevatedButton(
@@ -124,15 +149,17 @@ class _NewOfferState extends State<NewOffer> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red[300],
-                    shape: StadiumBorder(),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Save'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red[300],
+                      shape: StadiumBorder(),
+                    ),
                   ),
-                  onPressed: () {},
-                  child: Text('Create offer'),
                 ),
               ),
             ],

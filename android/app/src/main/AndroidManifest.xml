@@ -1,8 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.xy2">
+<queries>
+  
+  <intent>
+    <action android:name="android.intent.action.DIAL" />
+    <data android:scheme="tel" />
+  </intent>
+  
+</queries>
+
    <application
         android:label="xy2"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAvezk4TszUBIAX305m002W1Rq3CqXzL_k"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/agencydata.dart';
 import 'package:xy2/Screens/Profile/profile_widget.dart';
 import 'package:xy2/Screens/Profile/textfield_widget.dart';
@@ -11,6 +12,15 @@ class EditAgencyProfilePage extends StatefulWidget {
 
 class _EditAgencyProfilePageState extends State<EditAgencyProfilePage> {
   Agency agency = Agencyinfo().myagency;
+  File? _file;
+  ImagePicker _picker = ImagePicker();
+  List<XFile> images = [];
+  Future pickImage() async {
+    final image = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _file = File(image!.path);
+    });
+  }
 
   @override
   Widget build(BuildContext context) => Builder(
@@ -46,7 +56,7 @@ class _EditAgencyProfilePageState extends State<EditAgencyProfilePage> {
                   ProfileWidget(
                     imagePath: agency.agencyimage,
                     isEdit: true,
-                    onClicked: () async {},
+                    onClicked: pickImage,
                   ),
                   const SizedBox(height: 24),
                   TextFieldWidget(

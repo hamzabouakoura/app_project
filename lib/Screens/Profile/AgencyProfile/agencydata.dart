@@ -18,7 +18,7 @@ class Agencyinfo {
   Agency myagency = Agency(
     "Real estate",
     "Agencyname@gmail.com",
-    "0675915949",
+    "+213675915949",
     "assets/images/owner.jpg",
   );
 }

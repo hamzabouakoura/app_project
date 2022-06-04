@@ -1,19 +1,25 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:xy2/Screens/Home/data.dart';
 
 class MapView extends StatefulWidget {
+  final Property property;
+
+  const MapView({Key? key, required this.property}) : super(key: key);
   @override
   _MapViewState createState() => _MapViewState();
 }
 
 class _MapViewState extends State<MapView> {
+  List<Property> properties = getPropertyList();
   late GoogleMapController mapController;
   final Set<Marker> markers = new Set();
-  final LatLng _center = const LatLng(36, 6);
   late LatLng lastPosition;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+    getmarkers();
   }
 
   @override
@@ -21,12 +27,13 @@ class _MapViewState extends State<MapView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Maps View'),
-        backgroundColor: Colors.green[700],
+        backgroundColor: Colors.red[700],
       ),
       body: GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
-          target: _center,
+          target:
+              LatLng(widget.property.Latlng.first, widget.property.Latlng.last),
           zoom: 11.0,
         ),
         markers: markers,
@@ -41,24 +48,15 @@ class _MapViewState extends State<MapView> {
     //markers to place on map
     setState(() {
       markers.add(Marker(
-        //add first marker
-        markerId: MarkerId(_center.toString()),
-        position: _center, //position of marker
-        infoWindow: InfoWindow(
-          //popup info
-          title: 'Marker Title First ',
-          snippet: 'My Custom Subtitle',
-        ),
-        icon: BitmapDescriptor.defaultMarker, //Icon for Marker
-      ));
-
-      markers.add(Marker(
         //add second marker
-        markerId: MarkerId(_center.toString()),
-        position: LatLng(35.0099116, 6.3132343), //position of marker
+        markerId: MarkerId(
+            LatLng(widget.property.Latlng.first, widget.property.Latlng.last)
+                .toString()),
+        position: LatLng(widget.property.Latlng.first,
+            widget.property.Latlng.last), //position of marker
         infoWindow: InfoWindow(
           //popup info
-          title: 'Marker Title Second ',
+          title: widget.property.name,
           snippet: 'My Custom Subtitle',
         ),
         icon: BitmapDescriptor.defaultMarker, //Icon for Marker

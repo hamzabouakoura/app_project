@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:xy2/Screens/Profile/profile_widget.dart';
 import 'userdata.dart';
 import 'textfield_widget.dart';
@@ -11,6 +12,15 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   User user = Userinfo().myuser;
+  File? _file;
+  ImagePicker _picker = ImagePicker();
+  List<XFile> images = [];
+  Future pickImage() async {
+    final image = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _file = File(image!.path);
+    });
+  }
 
   @override
   Widget build(BuildContext context) => Builder(
@@ -43,7 +53,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ProfileWidget(
                     imagePath: user.userimage,
                     isEdit: true,
-                    onClicked: () async {},
+                    onClicked: pickImage,
                   ),
                   const SizedBox(height: 24),
                   TextFieldWidget(
