@@ -39,6 +39,9 @@ dependencies:
   google_maps_flutter: ^2.1.5
   url_launcher: ^6.1.2
   map_picker: ^0.0.3
+  geocoding: ^2.0.4
+  flutter_svg: ^1.0.3
+  geolocator: ^8.0.5
   
 
 dev_dependencies:

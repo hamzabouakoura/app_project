@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:map_picker/map_picker.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -17,11 +18,39 @@ class _MyHomePageState extends State<MyHomePage> {
   MapPickerController mapPickerController = MapPickerController();
 
   CameraPosition cameraPosition = const CameraPosition(
-    target: LatLng(41.311158, 69.279737),
+    target: LatLng(36.351830, 6.611630),
     zoom: 14.4746,
   );
 
   var textController = TextEditingController();
+
+  Future getPosition() async {
+    bool services;
+    LocationPermission per;
+    services = await Geolocator.isLocationServiceEnabled();
+    if (services == false) {}
+
+    per = await Geolocator.checkPermission();
+    if (per == LocationPermission.denied) {
+      per = await Geolocator.requestPermission();
+      if (per == LocationPermission.always) {
+        getLatLong();
+      }
+    }
+    print(per);
+  }
+
+  Future<Position> getLatLong() async {
+    return await Geolocator.getCurrentPosition().then((value) => value);
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getPosition();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   print(
                       "Location ${cameraPosition.target.latitude} ${cameraPosition.target.longitude}");
                   print("Address: ${textController.text}");
+                  Navigator.of(context).pop();
                 },
                 style: ButtonStyle(
                   backgroundColor:

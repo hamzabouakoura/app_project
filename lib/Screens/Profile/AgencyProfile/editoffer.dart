@@ -72,10 +72,14 @@ class _EditOfferState extends State<EditOffer> {
                   hint: 'Type',
                   text: widget.property.label,
                   onChanged: (label) {}),
-              OfferFormEdit(
-                  hint: 'Location',
-                  text: widget.property.location,
-                  onChanged: (location) {}),
+              Row(
+                children: [
+                  OfferFormEdit(
+                      hint: 'Location',
+                      text: widget.property.location,
+                      onChanged: (location) {}),
+                ],
+              ),
               OfferFormEdit(
                   hint: 'Rooms',
                   text: widget.property.rooms,

@@ -63,7 +63,21 @@ class _NewOfferState extends State<NewOffer> {
               ),
               OfferForm(hint: 'Name'),
               OfferForm(hint: 'Type'),
-              OfferForm(hint: 'Location'),
+              Row(
+                children: [
+                  Container(width: 300, child: OfferForm(hint: 'Location')),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                      );
+                    },
+                    icon: Icon(Icons.map_sharp),
+                    color: Colors.white,
+                  )
+                ],
+              ),
               OfferForm(hint: 'Rooms'),
               OfferForm(hint: 'Bathrooms'),
               OfferForm(hint: 'Garages'),
