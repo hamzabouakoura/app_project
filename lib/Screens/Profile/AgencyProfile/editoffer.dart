@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/agencydata.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/mappicker.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/offerformtoedit.dart';
 import 'package:xy2/Screens/Home/data.dart';
 
@@ -25,6 +26,71 @@ class _EditOfferState extends State<EditOffer> {
     });
   }
 
+  List<Property> properties = getPropertyList();
+
+  final items = ['Sell', 'Rent'];
+  final locations = [
+    'ADRAR',
+    'CHLEF',
+    'LAGHOUAT',
+    'OUM EL BOUAGHI',
+    'BATNA',
+    'BEJAIA',
+    'BISKRA',
+    'BECHAR',
+    'BLIDA',
+    'BOUIRA',
+    'TAMANRASSET',
+    'TEBESSA',
+    'TLEMCEN',
+    'TIARET',
+    'TIZI-OUZOU',
+    'ALGER',
+    'DJELFA',
+    'JIJEL',
+    'SETIF',
+    'SAIDA',
+    'SKIKDA',
+    'SIDI BEL-ABBES',
+    'ANNABA',
+    'GUELMA',
+    'CONSTANTINE',
+    'MEDEA',
+    'MOSTAGANEM',
+    'M’SILA',
+    'MASCARA',
+    'OUARGLA',
+    'ORAN',
+    'EL BAYADH',
+    'ILLIZI',
+    'B.B.ARRERIDJ',
+    'BOUMERDES',
+    'EL TARF',
+    'TINDOUF',
+    'TISSEMSILT',
+    'EL-OUED',
+    'KHENCHELA',
+    'SOUK AHRAS',
+    'TIPAZA',
+    'MILA',
+    'AIN-DEFLA',
+    'NAAMA',
+    'AIN TEMOUCHENT',
+    'GHARDAIA',
+    'RELIZANE',
+    'TIMIMOUN',
+    'BORDJ BADJI MOKHTAR',
+    'OULED DJELLAL',
+    'BENI ABBES ',
+    'IN SALAH',
+    'IN GUEZZAM',
+    'TOUGGOURT',
+    'DJANET',
+    'El MGHAIR ',
+    'MENIAA',
+  ];
+  String? value1;
+  String? value2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,16 +134,78 @@ class _EditOfferState extends State<EditOffer> {
                   hint: 'Name',
                   text: widget.property.name,
                   onChanged: (name) {}),
-              OfferFormEdit(
-                  hint: 'Type',
-                  text: widget.property.label,
-                  onChanged: (label) {}),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Container(
+                  height: 55,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      hint: Padding(
+                        padding: const EdgeInsets.only(left: 12.0),
+                        child: Text(
+                          'Type',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      value: value1,
+                      isExpanded: true,
+                      items: items.map(buildMenuItem).toList(),
+                      onChanged: (value) => setState(() {
+                        this.value1 = value;
+                      }),
+                    ),
+                  ),
+                ),
+              ),
               Row(
                 children: [
-                  OfferFormEdit(
-                      hint: 'Location',
-                      text: widget.property.location,
-                      onChanged: (location) {}),
+                  Container(
+                    width: 300,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: Container(
+                        height: 55,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            hint: Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: Text(
+                                'Location',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ),
+                            value: value2,
+                            isExpanded: true,
+                            items: locations.map(buildMenuItem2).toList(),
+                            onChanged: (value) {
+                              value2 = value;
+                              setState(() {
+                                this.value2 = value;
+                                print(value2);
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                      );
+                    },
+                    icon: Icon(Icons.map_sharp),
+                    color: Colors.white,
+                  )
                 ],
               ),
               OfferFormEdit(
@@ -178,5 +306,29 @@ class _EditOfferState extends State<EditOffer> {
     setState(() {
       images.addAll(res!);
     });
+  }
+
+  DropdownMenuItem<String> buildMenuItem(String item) {
+    return DropdownMenuItem(
+      value: item,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 12.0),
+        child: Text(
+          item,
+        ),
+      ),
+    );
+  }
+
+  DropdownMenuItem<String> buildMenuItem2(String item2) {
+    return DropdownMenuItem(
+      value: item2,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 12.0),
+        child: Text(
+          item2,
+        ),
+      ),
+    );
   }
 }

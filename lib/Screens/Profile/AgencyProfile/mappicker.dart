@@ -23,6 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   );
 
   var textController = TextEditingController();
+  Position? cl;
 
   Future getPosition() async {
     bool services;
@@ -40,8 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
     print(per);
   }
 
-  Future<Position> getLatLong() async {
-    return await Geolocator.getCurrentPosition().then((value) => value);
+  Future<Position?> getLatLong() async {
+    return cl = await Geolocator.getCurrentPosition().then((value) => value);
 
     setState(() {});
   }
@@ -73,7 +74,8 @@ class _MyHomePageState extends State<MyHomePage> {
               myLocationButtonEnabled: false,
               mapType: MapType.normal,
               //  camera position
-              initialCameraPosition: cameraPosition,
+              initialCameraPosition: CameraPosition(
+                  target: LatLng(cl!.latitude, cl!.longitude), zoom: 10),
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
