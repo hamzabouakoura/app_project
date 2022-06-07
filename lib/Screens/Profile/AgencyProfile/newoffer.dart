@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:xy2/Screens/Profile/AgencyProfile/mappicker.dart';
+import 'package:flutter/services.dart';
+import 'package:material_tag_editor/tag_editor.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/offerform.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:async';
@@ -9,7 +9,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_picker/map_picker.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geolocator/geolocator.dart';
 
 class NewOffer extends StatefulWidget {
   const NewOffer({Key? key}) : super(key: key);
@@ -104,6 +103,16 @@ class _NewOfferState extends State<NewOffer> {
   String? value2;
   dynamic Long;
   dynamic Lat;
+
+  List<String> _values = [];
+  final FocusNode _focusNode = FocusNode();
+  final TextEditingController _textEditingController = TextEditingController();
+
+  _onDelete(index) {
+    setState(() {
+      _values.removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -222,6 +231,48 @@ class _NewOfferState extends State<NewOffer> {
               OfferForm(
                 hint: 'Description',
                 maxLines: 7,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TagEditor(
+                        length: _values.length,
+                        controller: _textEditingController,
+                        focusNode: _focusNode,
+                        delimiters: [',', ' '],
+                        hasAddButton: true,
+                        resetTextOnSubmitted: true,
+                        textStyle: const TextStyle(color: Colors.grey),
+                        onSubmitted: (outstandingValue) {
+                          setState(() {
+                            _values.add(outstandingValue);
+                          });
+                        },
+                        inputDecoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Tags',
+                        ),
+                        onTagChanged: (newValue) {
+                          setState(() {
+                            _values.add(newValue);
+                          });
+                          print(_values.first);
+                        },
+                        tagBuilder: (context, index) => _Chip(
+                          index: index,
+                          label: _values[index],
+                          onDeleted: _onDelete,
+                        ),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.deny(RegExp(r'[/\\+-]'))
+                        ],
+                      ),
+                    )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -427,6 +478,33 @@ class _NewOfferState extends State<NewOffer> {
           )
         ],
       ),
+    );
+  }
+}
+
+class _Chip extends StatelessWidget {
+  const _Chip({
+    required this.label,
+    required this.onDeleted,
+    required this.index,
+  });
+
+  final String label;
+  final ValueChanged<int> onDeleted;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      labelPadding: const EdgeInsets.only(left: 8.0),
+      label: Text(label),
+      deleteIcon: const Icon(
+        Icons.close,
+        size: 18,
+      ),
+      onDeleted: () {
+        onDeleted(index);
+      },
     );
   }
 }
