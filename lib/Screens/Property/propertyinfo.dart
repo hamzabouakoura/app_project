@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:xy2/Screens/Home/data.dart';
 import 'package:xy2/Screens/Profile/AgencyProfile/agencydata.dart';
+import 'package:xy2/Screens/Profile/AgencyProfile/profilepageforagency.dart';
+import 'package:xy2/Screens/Profile/profile.dart';
 import 'package:xy2/Screens/Property/commentpage.dart';
 import 'package:xy2/constantcolors.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -119,52 +121,57 @@ class _PropertyInfoState extends State<PropertyInfo> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+            padding: EdgeInsets.fromLTRB(10, 0, 20, 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      height: 65,
-                      width: 65,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(agency.agencyimage),
-                          fit: BoxFit.cover,
+                FlatButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AgencyProfile2()),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 65,
+                        width: 65,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(agency.agencyimage),
+                            fit: BoxFit.cover,
+                          ),
+                          shape: BoxShape.circle,
                         ),
-                        shape: BoxShape.circle,
                       ),
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.property.ownername,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.property.ownername,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          "Property Owner",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white70,
+                          SizedBox(
+                            height: 4,
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: 15,
+                          Text(
+                            "Property Owner",
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   children: [

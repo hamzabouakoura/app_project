@@ -50,34 +50,40 @@ class _EditAgencyProfilePageState extends State<EditAgencyProfilePage> {
                 padding: EdgeInsets.symmetric(horizontal: 32),
                 physics: BouncingScrollPhysics(),
                 children: [
-                  SizedBox(
-                    height: 30,
-                  ),
                   ProfileWidget(
                     imagePath: agency.agencyimage,
                     isEdit: true,
                     onClicked: pickImage,
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   TextFieldWidget(
                     label: 'Company Name',
                     text: agency.companyname,
                     onChanged: (companyname) {},
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   TextFieldWidget(
                     label: 'Email',
                     text: agency.email,
                     onChanged: (email) {},
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   TextFieldWidget(
                     label: 'Phone',
                     text: agency.phone,
                     onChanged: (phone) {},
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 20,
+                  ),
+                  TextFieldWidget(
+                    label: 'Bio',
+                    text: '',
+                    onChanged: (Bio) {},
+                    maxLines: 5,
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
